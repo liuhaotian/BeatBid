@@ -44,8 +44,8 @@ void PrintMethod(method_t* method, int numMethod){
     }
 }
 
-long long int RoundUp(float in){
-    
+long long int RoundUp(double in){
+    return (long long int)ceil(in);
 }
 
 long long int DirectCost(method_t* method){
@@ -161,9 +161,9 @@ long long int DirectCost(method_t* method){
 
     for (i = 0; i < 9; ++i)
     {
-        ret += method->Activities[7].Labor;
-        ret += method->Activities[7].Material;
-        ret += method->Activities[7].Subcontractor;
+        ret += method->Activities[i].Labor;
+        ret += method->Activities[i].Material;
+        ret += method->Activities[i].Subcontractor;
     }
 
     return ret;
@@ -200,6 +200,8 @@ int main(int argc, char const *argv[])
     }
 
     PrintMethod(Method, numMethod);
+
+    PrintMethod(Method + 4, 1);
     printf("%lld\n", DirectCost(Method + 4));
     printf("%lld\n", RoundUp(1.1));
 
