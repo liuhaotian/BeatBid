@@ -129,55 +129,55 @@ long long int DirectCost(method_t* method){
     //Excavation 0
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Foundation 1
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Basement 2
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Framing 3
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Closure 4
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Roof 5
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Siding 6
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Finishing 7
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     //Mechanical &Elctrical 8
     days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
                             RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
-    method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
+    method->Activities[i].finishDay = days;
     i++;
 
     days = max(method->Activities[8].finishDay, method->Activities[7].finishDay);
@@ -197,7 +197,7 @@ int main(int argc, char const *argv[])
     FILE * fin = fopen("orginaldata", "r");
     FILE * fout = fopen("output.out", "w");
 
-    int i, j;
+    int i, j, k, l, m, n, o, p, q;
 
     int penalty;
     SAFESCAN(fscanf(fin, "Penalty: $%d\n", &penalty), "Penalty Format Error\n")
@@ -226,6 +226,82 @@ int main(int argc, char const *argv[])
 
     //PrintMethod(Method + 4, 1);
     //printf("%lld\n", DirectCost(Method + 4));
+    method_t tempmethod;
+    long long int minCost = 1e12;
+    for (i = 0; i < 5; ++i)
+    {
+        for (j = 0; j < 5; ++j)
+        {
+            for (k = 0; k < 5; ++k)
+            {
+                for (l = 0; l < 5; ++l)
+                {
+                    for (m = 0; m < 5; ++m)
+                    {
+                        for (n = 0; n < 5; ++n)
+                        {
+                            for (o = 0; o < 5; ++o)
+                            {
+                                for (p = 0; p < 5; ++p)
+                                {
+                                    for (q = 0; q < 5; ++q)
+                                    {
+                                        tempmethod.Activities[0].Labor = (Method + i)->Activities[0].Labor;
+                                        tempmethod.Activities[0].Material = (Method + i)->Activities[0].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + i)->Activities[0].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + i)->Activities[0].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + j)->Activities[1].Labor;
+                                        tempmethod.Activities[0].Material = (Method + j)->Activities[1].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + j)->Activities[1].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + j)->Activities[1].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + k)->Activities[2].Labor;
+                                        tempmethod.Activities[0].Material = (Method + k)->Activities[2].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + k)->Activities[2].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + k)->Activities[2].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + l)->Activities[3].Labor;
+                                        tempmethod.Activities[0].Material = (Method + l)->Activities[3].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + l)->Activities[3].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + l)->Activities[3].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + m)->Activities[4].Labor;
+                                        tempmethod.Activities[0].Material = (Method + m)->Activities[4].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + m)->Activities[4].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + m)->Activities[4].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + n)->Activities[5].Labor;
+                                        tempmethod.Activities[0].Material = (Method + n)->Activities[5].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + n)->Activities[5].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + n)->Activities[5].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + o)->Activities[6].Labor;
+                                        tempmethod.Activities[0].Material = (Method + o)->Activities[6].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + o)->Activities[6].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + o)->Activities[6].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + p)->Activities[7].Labor;
+                                        tempmethod.Activities[0].Material = (Method + p)->Activities[7].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + p)->Activities[7].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + p)->Activities[7].Days;
+
+                                        tempmethod.Activities[0].Labor = (Method + q)->Activities[8].Labor;
+                                        tempmethod.Activities[0].Material = (Method + q)->Activities[8].Material;
+                                        tempmethod.Activities[0].Subcontractor = (Method + q)->Activities[8].Subcontractor;
+                                        tempmethod.Activities[0].Days = (Method + q)->Activities[8].Days;
+
+                                        minCost = min(DirectCost(&tempmethod), minCost);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    printf("%lld\n", minCost);
 
     free(Method);
     fclose(fin);
