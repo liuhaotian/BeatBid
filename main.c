@@ -50,8 +50,9 @@ long long int RoundUp(double in){
 
 long long int DirectCost(method_t* method){
     long long int ret = 0;
-    int days, i = 0;;
-    int rely[9][2], ratio[9][2];
+    int days, i = 0;
+    int rely[9][2];
+    float ratio[9][2];
     //memset(rely, 0, 18);
     rely[0][0] = 0;
     rely[1][0] = 0;
@@ -63,7 +64,7 @@ long long int DirectCost(method_t* method){
     rely[7][0] = 6;
     rely[8][0] = 0;
     rely[0][1] = 0;
-    rely[1][1] = 0;
+    rely[1][1] = 1;
     rely[2][1] = 1;
     rely[3][1] = 1;
     rely[4][1] = 3;
@@ -103,7 +104,7 @@ long long int DirectCost(method_t* method){
 
     //for the beginning:
     //Work may not start on Excavation until work on itself is 0% complete.
-    //Work on Excavation may not proceed past 50% until work on Foundation is 100% complete.
+    //Work on Excavation may not proceed past 100% until work on itself is 100% complete.
 
     // if the last network lacks the second constrain, we set the second rely to the same, ratio to 1
     // so it looks like:
@@ -120,6 +121,10 @@ long long int DirectCost(method_t* method){
 
     */
 
+
+
+
+    
     //Excavation 0
     days = method->Activities[0].Days;
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
@@ -173,7 +178,7 @@ long long int DirectCost(method_t* method){
     i++;
 
     days = max(method->Activities[8].finishDay, method->Activities[7].finishDay);
-
+    
     for (i = 0; i < 9; ++i)
     {
         ret += method->Activities[i].Labor;
@@ -214,11 +219,10 @@ int main(int argc, char const *argv[])
         }
     }
 
-    PrintMethod(Method, numMethod);
+    //PrintMethod(Method, numMethod);
 
     PrintMethod(Method + 4, 1);
     printf("%lld\n", DirectCost(Method + 4));
-    printf("%lld\n", RoundUp(1.1));
 
     free(Method);
     fclose(fin);
