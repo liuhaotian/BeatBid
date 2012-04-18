@@ -101,7 +101,10 @@ long long int DirectCost(method_t* method){
     8 0.3 0.6
     9 0.7 0.4
 
-
+    // if the last network lacks the second constrain, we set the second rely to the same, ratio to 1
+    // so it looks like:
+    //Work on Mechanical & Electrical may not proceed past 100% until work on Siding is 100% complete.
+    // a kind of work around
 
     */
 
