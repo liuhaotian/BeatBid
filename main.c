@@ -251,45 +251,45 @@ int main(int argc, char const *argv[])
                                         tempmethod.Activities[0].Subcontractor = (Method + i)->Activities[0].Subcontractor;
                                         tempmethod.Activities[0].Days = (Method + i)->Activities[0].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + j)->Activities[1].Labor;
-                                        tempmethod.Activities[0].Material = (Method + j)->Activities[1].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + j)->Activities[1].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + j)->Activities[1].Days;
+                                        tempmethod.Activities[1].Labor = (Method + j)->Activities[1].Labor;
+                                        tempmethod.Activities[1].Material = (Method + j)->Activities[1].Material;
+                                        tempmethod.Activities[1].Subcontractor = (Method + j)->Activities[1].Subcontractor;
+                                        tempmethod.Activities[1].Days = (Method + j)->Activities[1].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + k)->Activities[2].Labor;
-                                        tempmethod.Activities[0].Material = (Method + k)->Activities[2].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + k)->Activities[2].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + k)->Activities[2].Days;
+                                        tempmethod.Activities[2].Labor = (Method + k)->Activities[2].Labor;
+                                        tempmethod.Activities[2].Material = (Method + k)->Activities[2].Material;
+                                        tempmethod.Activities[2].Subcontractor = (Method + k)->Activities[2].Subcontractor;
+                                        tempmethod.Activities[2].Days = (Method + k)->Activities[2].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + l)->Activities[3].Labor;
-                                        tempmethod.Activities[0].Material = (Method + l)->Activities[3].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + l)->Activities[3].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + l)->Activities[3].Days;
+                                        tempmethod.Activities[3].Labor = (Method + l)->Activities[3].Labor;
+                                        tempmethod.Activities[3].Material = (Method + l)->Activities[3].Material;
+                                        tempmethod.Activities[3].Subcontractor = (Method + l)->Activities[3].Subcontractor;
+                                        tempmethod.Activities[3].Days = (Method + l)->Activities[3].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + m)->Activities[4].Labor;
-                                        tempmethod.Activities[0].Material = (Method + m)->Activities[4].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + m)->Activities[4].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + m)->Activities[4].Days;
+                                        tempmethod.Activities[4].Labor = (Method + m)->Activities[4].Labor;
+                                        tempmethod.Activities[4].Material = (Method + m)->Activities[4].Material;
+                                        tempmethod.Activities[4].Subcontractor = (Method + m)->Activities[4].Subcontractor;
+                                        tempmethod.Activities[4].Days = (Method + m)->Activities[4].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + n)->Activities[5].Labor;
-                                        tempmethod.Activities[0].Material = (Method + n)->Activities[5].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + n)->Activities[5].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + n)->Activities[5].Days;
+                                        tempmethod.Activities[5].Labor = (Method + n)->Activities[5].Labor;
+                                        tempmethod.Activities[5].Material = (Method + n)->Activities[5].Material;
+                                        tempmethod.Activities[5].Subcontractor = (Method + n)->Activities[5].Subcontractor;
+                                        tempmethod.Activities[5].Days = (Method + n)->Activities[5].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + o)->Activities[6].Labor;
-                                        tempmethod.Activities[0].Material = (Method + o)->Activities[6].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + o)->Activities[6].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + o)->Activities[6].Days;
+                                        tempmethod.Activities[6].Labor = (Method + o)->Activities[6].Labor;
+                                        tempmethod.Activities[6].Material = (Method + o)->Activities[6].Material;
+                                        tempmethod.Activities[6].Subcontractor = (Method + o)->Activities[6].Subcontractor;
+                                        tempmethod.Activities[6].Days = (Method + o)->Activities[6].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + p)->Activities[7].Labor;
-                                        tempmethod.Activities[0].Material = (Method + p)->Activities[7].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + p)->Activities[7].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + p)->Activities[7].Days;
+                                        tempmethod.Activities[7].Labor = (Method + p)->Activities[7].Labor;
+                                        tempmethod.Activities[7].Material = (Method + p)->Activities[7].Material;
+                                        tempmethod.Activities[7].Subcontractor = (Method + p)->Activities[7].Subcontractor;
+                                        tempmethod.Activities[7].Days = (Method + p)->Activities[7].Days;
 
-                                        tempmethod.Activities[0].Labor = (Method + q)->Activities[8].Labor;
-                                        tempmethod.Activities[0].Material = (Method + q)->Activities[8].Material;
-                                        tempmethod.Activities[0].Subcontractor = (Method + q)->Activities[8].Subcontractor;
-                                        tempmethod.Activities[0].Days = (Method + q)->Activities[8].Days;
+                                        tempmethod.Activities[8].Labor = (Method + q)->Activities[8].Labor;
+                                        tempmethod.Activities[8].Material = (Method + q)->Activities[8].Material;
+                                        tempmethod.Activities[8].Subcontractor = (Method + q)->Activities[8].Subcontractor;
+                                        tempmethod.Activities[8].Days = (Method + q)->Activities[8].Days;
 
                                         minCost = min(DirectCost(&tempmethod), minCost);
                                     }
