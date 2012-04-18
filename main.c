@@ -53,13 +53,14 @@ long long int DirectCost(method_t* method){
     int days, i = 0;
     int rely[9][2];
     float ratio[9][2];
+    method->Activities[0].finishDay = method->Activities[0].Days;
     //memset(rely, 0, 18);
     rely[0][0] = 0;
     rely[1][0] = 0;
     rely[2][0] = 1;
     rely[3][0] = 1;
     rely[4][0] = 3;
-    rely[5][0] = 3;
+    rely[5][0] = 4;
     rely[6][0] = 4;
     rely[7][0] = 6;
     rely[8][0] = 0;
@@ -68,13 +69,13 @@ long long int DirectCost(method_t* method){
     rely[2][1] = 1;
     rely[3][1] = 1;
     rely[4][1] = 3;
-    rely[5][1] = 3;
+    rely[5][1] = 4;
     rely[6][1] = 4;
     rely[7][1] = 6;
     rely[8][1] = 4;
 
     ratio[0][0] = 0;
-    ratio[0][1] = 0;
+    ratio[0][1] = 1;
     ratio[1][0] = 0.7;
     ratio[1][1] = 0;
     ratio[2][0] = 0.5;
@@ -126,54 +127,56 @@ long long int DirectCost(method_t* method){
 
     
     //Excavation 0
-    days = method->Activities[0].Days;
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Foundation 1
-    days = RoundUp(0.7 * method->Activities[rely[i][0]].Days + method->Activities[i].Days);
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Basement 2
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Framing 3
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Closure 4
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Roof 5
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Siding 6
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Finishing 7
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
     //Mechanical &Elctrical 8
-    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - (1 - ratio[i][0]) * method->Activities[rely[i][0]].Days + method->Activities[i].Days, 
-                            (1 - ratio[i][1]) * method->Activities[i].Days + method->Activities[rely[i][1]].finishDay));
+    days = RoundUp(max( method->Activities[rely[i][0]].finishDay - RoundUp((1 - ratio[i][0]) * method->Activities[rely[i][0]].Days) + method->Activities[i].Days, 
+                            RoundUp((1 - ratio[i][1]) * method->Activities[i].Days) + method->Activities[rely[i][1]].finishDay));
     method->Activities[i].finishDay = days;printf("%lld\n", method->Activities[i].finishDay);
     i++;
 
@@ -221,8 +224,8 @@ int main(int argc, char const *argv[])
 
     //PrintMethod(Method, numMethod);
 
-    PrintMethod(Method + 4, 1);
-    printf("%lld\n", DirectCost(Method + 4));
+    //PrintMethod(Method + 4, 1);
+    //printf("%lld\n", DirectCost(Method + 4));
 
     free(Method);
     fclose(fin);
