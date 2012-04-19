@@ -353,7 +353,8 @@ int main(int argc, char const *argv[])
         }
         fprintf (fout, "%d\t%lld\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
                         targetDay, minCost,
-                            minArray[0], minArray[1], minArray[2], minArray[3], minArray[4], minArray[5], minArray[6], minArray[7], minArray[8]);
+                            minArray[0] + 1, minArray[1] + 1, minArray[2] + 1, minArray[3] + 1, 
+                                minArray[4] + 1, minArray[5] + 1, minArray[6] + 1, minArray[7] + 1, minArray[8] + 1);
     }
     //printf("%lld\n", minCost);
 
