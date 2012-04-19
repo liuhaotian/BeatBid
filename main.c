@@ -27,6 +27,16 @@ typedef struct method_t
     act_t Activities[9];
 } method_t;
 
+    int penalty;
+    int requireDay;
+    int targetMinDay, targetMaxDay;
+    int numMethod;
+    method_t* Method;
+    FILE * fin;
+    FILE * fout;
+    int rely[9][2];
+    float ratio[9][2];
+
 void PrintMethod(method_t* method, int numMethod){
     int i, j;
     method_t* tempmethod;
@@ -54,10 +64,11 @@ long long int RoundUp(double in){
 long long int DirectCost(method_t* method){
     long long int ret = 0;
     long long int days, i = 0;
-    int rely[9][2];
-    float ratio[9][2];
+    //int rely[9][2];
+    //float ratio[9][2];
     method->Activities[0].finishDay = method->Activities[0].Days;
     //memset(rely, 0, 18);
+    /*
     rely[0][0] = 0;
     rely[1][0] = 0;
     rely[2][0] = 1;
@@ -95,6 +106,7 @@ long long int DirectCost(method_t* method){
     ratio[7][1] = 0.6;
     ratio[8][0] = 0.7;
     ratio[8][1] = 0.4;
+    */
     /*
     1 0 0
     2 0.7 0
@@ -204,14 +216,6 @@ long long int FinishDay(method_t* method){
     }
     return ret;
 }
-
-    int penalty;
-    int requireDay;
-    int targetMinDay, targetMaxDay;
-    int numMethod;
-    method_t* Method;
-    FILE * fin;
-    FILE * fout;
 
 void* bidding(void* threadid){
     long tid = (long)threadid;
@@ -350,6 +354,19 @@ int main(int argc, char const *argv[])
     SAFESCAN(fscanf(fin, "Required days: %d\n", &requireDay), "Required days Format Error\n")
 
     SAFESCAN(fscanf(fin, "Target day: %d %d\n", &targetMinDay, &targetMaxDay), "Target day Format Error\n")
+
+    for (i = 0; i < 9; ++i)
+    {
+        SAFESCAN(fscanf(fin, "%d\t%d\t%d\t%f%%\t%f%%\n", &j, &rely[i][0], &rely[i][1], &ratio[i][0], &ratio[i][1]), 
+                                "Ratio and rely Format Error\n")
+        rely[i][0]--;
+        rely[i][1]--;
+
+        ratio[i][0] /= 100;
+        ratio[i][1] /= 100;
+    }
+
+    //SAFESCAN(fscanf(fin, "Target day: %d %d\n", &targetMinDay, &targetMaxDay), "Target day Format Error\n")
 
     SAFESCAN(fscanf(fin, "NumMethod: %d\n", &numMethod), "NumMethod Format Error\n")
 
