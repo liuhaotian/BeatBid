@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include <pthread.h>
 
 #define SAFESCAN(f,...) if (f == 0) { printf(__VA_ARGS__); exit(1);}
 #define max( a, b ) ( ((a) > (b)) ? (a) : (b) )
@@ -40,6 +41,8 @@ void PrintMethod(method_t* method, int numMethod){
             printf("%lld\t", (method + i)->Activities[j].Material);
             printf("%lld\t", (method + i)->Activities[j].Subcontractor);
             printf("%lld\n", (method + i)->Activities[j].Days);
+
+            printf("%lld\n", (method + i)->Activities[j].finishDay);
         }
     }
 }
@@ -50,7 +53,7 @@ long long int RoundUp(double in){
 
 long long int DirectCost(method_t* method){
     long long int ret = 0;
-    int days, i = 0;
+    long long int days, i = 0;
     int rely[9][2];
     float ratio[9][2];
     method->Activities[0].finishDay = method->Activities[0].Days;
@@ -192,8 +195,8 @@ long long int DirectCost(method_t* method){
     return ret;
 }
 
-int FinishDay(method_t* method){
-    int ret = 0;
+long long int FinishDay(method_t* method){
+    long long int ret = 0;
     int i;
     for (i = 0; i < 9; ++i)
     {
@@ -202,26 +205,154 @@ int FinishDay(method_t* method){
     return ret;
 }
 
+    int penalty;
+    int requireDay;
+    int targetMinDay, targetMaxDay;
+    int numMethod;
+    method_t* Method;
+    FILE * fin;
+    FILE * fout;
+
+void* bidding(void* threadid){
+    long tid = (long)threadid;
+    int i, j, k, l, m, n, o, p, q;
+    method_t tempmethod;
+    long long int minCost = 1e12, tempCost = 0;
+    int minArray[9];
+    memset(minArray, 0, 9);
+    long long int targetDay = 0, tempDay;
+    for (targetDay = targetMinDay + tid; targetDay < targetMaxDay; targetDay += 8)
+    {
+        for (i = 0; i < 5; ++i)
+        {
+            for (j = 0; j < 5; ++j)
+            {
+                for (k = 0; k < 5; ++k)
+                {
+                    for (l = 0; l < 5; ++l)
+                    {
+                        for (m = 0; m < 5; ++m)
+                        {
+                            for (n = 0; n < 5; ++n)
+                            {
+                                for (o = 0; o < 5; ++o)
+                                {
+                                    for (p = 0; p < 5; ++p)
+                                    {
+                                        for (q = 0; q < 5; ++q)
+                                        {
+                                            tempmethod.Activities[0].Labor = (Method + i)->Activities[0].Labor;
+                                            tempmethod.Activities[0].Material = (Method + i)->Activities[0].Material;
+                                            tempmethod.Activities[0].Subcontractor = (Method + i)->Activities[0].Subcontractor;
+                                            tempmethod.Activities[0].Days = (Method + i)->Activities[0].Days;
+                                            tempmethod.Activities[0].finishDay = 0;
+
+                                            tempmethod.Activities[1].Labor = (Method + j)->Activities[1].Labor;
+                                            tempmethod.Activities[1].Material = (Method + j)->Activities[1].Material;
+                                            tempmethod.Activities[1].Subcontractor = (Method + j)->Activities[1].Subcontractor;
+                                            tempmethod.Activities[1].Days = (Method + j)->Activities[1].Days;
+                                            tempmethod.Activities[1].finishDay = 0;
+
+                                            tempmethod.Activities[2].Labor = (Method + k)->Activities[2].Labor;
+                                            tempmethod.Activities[2].Material = (Method + k)->Activities[2].Material;
+                                            tempmethod.Activities[2].Subcontractor = (Method + k)->Activities[2].Subcontractor;
+                                            tempmethod.Activities[2].Days = (Method + k)->Activities[2].Days;
+                                            tempmethod.Activities[2].finishDay = 0;
+
+                                            tempmethod.Activities[3].Labor = (Method + l)->Activities[3].Labor;
+                                            tempmethod.Activities[3].Material = (Method + l)->Activities[3].Material;
+                                            tempmethod.Activities[3].Subcontractor = (Method + l)->Activities[3].Subcontractor;
+                                            tempmethod.Activities[3].Days = (Method + l)->Activities[3].Days;
+                                            tempmethod.Activities[3].finishDay = 0;
+
+                                            tempmethod.Activities[4].Labor = (Method + m)->Activities[4].Labor;
+                                            tempmethod.Activities[4].Material = (Method + m)->Activities[4].Material;
+                                            tempmethod.Activities[4].Subcontractor = (Method + m)->Activities[4].Subcontractor;
+                                            tempmethod.Activities[4].Days = (Method + m)->Activities[4].Days;
+                                            tempmethod.Activities[4].finishDay = 0;
+
+                                            tempmethod.Activities[5].Labor = (Method + n)->Activities[5].Labor;
+                                            tempmethod.Activities[5].Material = (Method + n)->Activities[5].Material;
+                                            tempmethod.Activities[5].Subcontractor = (Method + n)->Activities[5].Subcontractor;
+                                            tempmethod.Activities[5].Days = (Method + n)->Activities[5].Days;
+                                            tempmethod.Activities[5].finishDay = 0;
+
+                                            tempmethod.Activities[6].Labor = (Method + o)->Activities[6].Labor;
+                                            tempmethod.Activities[6].Material = (Method + o)->Activities[6].Material;
+                                            tempmethod.Activities[6].Subcontractor = (Method + o)->Activities[6].Subcontractor;
+                                            tempmethod.Activities[6].Days = (Method + o)->Activities[6].Days;
+                                            tempmethod.Activities[6].finishDay = 0;
+
+                                            tempmethod.Activities[7].Labor = (Method + p)->Activities[7].Labor;
+                                            tempmethod.Activities[7].Material = (Method + p)->Activities[7].Material;
+                                            tempmethod.Activities[7].Subcontractor = (Method + p)->Activities[7].Subcontractor;
+                                            tempmethod.Activities[7].Days = (Method + p)->Activities[7].Days;
+                                            tempmethod.Activities[7].finishDay = 0;
+
+                                            tempmethod.Activities[8].Labor = (Method + q)->Activities[8].Labor;
+                                            tempmethod.Activities[8].Material = (Method + q)->Activities[8].Material;
+                                            tempmethod.Activities[8].Subcontractor = (Method + q)->Activities[8].Subcontractor;
+                                            tempmethod.Activities[8].Days = (Method + q)->Activities[8].Days;
+                                            tempmethod.Activities[8].finishDay = 0;
+
+                                            //minCost = min(DirectCost(&tempmethod), minCost);
+                                            tempCost = DirectCost(&tempmethod);
+                                            tempDay = FinishDay(&tempmethod);
+
+                                            if (tempDay <= targetDay)
+                                            {
+                                                if (tempDay > requireDay)
+                                                {
+                                                    tempCost += (tempDay - requireDay) * penalty;
+                                                }
+                                                minCost = min(tempCost, minCost);
+                                                if (minCost == tempCost)
+                                                {
+                                                    minArray[0] = i;
+                                                    minArray[1] = j;
+                                                    minArray[2] = k;
+                                                    minArray[3] = l;
+                                                    minArray[4] = m;
+                                                    minArray[5] = n;
+                                                    minArray[6] = o;
+                                                    minArray[7] = p;
+                                                    minArray[8] = q;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //DirectCost(&tempmethod);
+        //PrintMethod(&tempmethod, 1);
+        //printf("%lld\n", tempmethod.Activities[2].finishDay);
+        fprintf (fout, "%lld\t%lld\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n",
+                        targetDay, minCost,
+                            minArray[0] + 1, minArray[1] + 1, minArray[2] + 1, minArray[3] + 1, 
+                                minArray[4] + 1, minArray[5] + 1, minArray[6] + 1, minArray[7] + 1, minArray[8] + 1);
+    }
+}
+
 int main(int argc, char const *argv[])
 {
-    FILE * fin = fopen("orginaldata", "r");
-    FILE * fout = fopen("output.out", "w");
+    fin = fopen("orginaldata", "r");
+    fout = fopen("output.out", "w");
 
     int i, j, k, l, m, n, o, p, q;
 
-    int penalty;
     SAFESCAN(fscanf(fin, "Penalty: $%d\n", &penalty), "Penalty Format Error\n")
 
-    int requireDay;
     SAFESCAN(fscanf(fin, "Required days: %d\n", &requireDay), "Required days Format Error\n")
 
-    int targetMinDay, targetMaxDay;
     SAFESCAN(fscanf(fin, "Target day: %d %d\n", &targetMinDay, &targetMaxDay), "Target day Format Error\n")
 
-    int numMethod;
     SAFESCAN(fscanf(fin, "NumMethod: %d\n", &numMethod), "NumMethod Format Error\n")
 
-    method_t* Method;
     Method = calloc(numMethod, sizeof(method_t));
     char name[20];
 
@@ -239,7 +370,7 @@ int main(int argc, char const *argv[])
     }
 
     //PrintMethod(Method, numMethod);
-
+    //DirectCost(Method + 4);
     //PrintMethod(Method + 4, 1);
     /*
     printf("%lld\n", DirectCost(Method + 4));
@@ -248,10 +379,19 @@ int main(int argc, char const *argv[])
         printf("%lld\n", (Method + 4)->Activities[i].finishDay);
     }
     */
-
+    pthread_t threads[8];
+    int rc;
+    long iterator;
+    for (iterator = 0; iterator < 8; ++iterator)
+    {
+        rc = pthread_create(&threads[i], NULL, bidding, (void*)iterator);
+    }
+    pthread_exit(NULL);
+    /*
     method_t tempmethod;
     long long int minCost = 1e12, tempCost;
-    int minArray[9]; 
+    int minArray[9];
+    memset(minArray, 0, 9);
     int targetDay = 0, tempDay;
     for (targetDay = targetMinDay; targetDay < targetMaxDay; ++targetDay)
     {
@@ -356,6 +496,7 @@ int main(int argc, char const *argv[])
                             minArray[0] + 1, minArray[1] + 1, minArray[2] + 1, minArray[3] + 1, 
                                 minArray[4] + 1, minArray[5] + 1, minArray[6] + 1, minArray[7] + 1, minArray[8] + 1);
     }
+    */
     //printf("%lld\n", minCost);
 
     free(Method);
