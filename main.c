@@ -344,8 +344,11 @@ void* bidding(void* threadid){
 
 int main(int argc, char const *argv[])
 {
-    fin = fopen("orginaldata", "r");
-    fout = fopen("output.out", "w");
+    fin = fopen(argv[1], "r");
+    char tempout[50];
+    strcpy(tempout,argv[1]);
+    strcat(tempout,".out.txt");
+    fout = fopen(tempout, "w");
 
     int i, j, k, l, m, n, o, p, q;
 
