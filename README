@@ -48,8 +48,10 @@ Analyis the result
 make
 ./main whateverinputfile
 --> you will get whateverinputfile.out
-take out all the rows with mini cost=1e12. It is the combination that impossible to be less then ${day}.
-Sort the rows within excel, plot the result and you will understand it.
+
+Take out all the rows with mini cost=1e12. It is because the combination that impossible to be less then ${day}. In each line, first number is the days, within which the project must compele. Notice that the that ${days} is not the finish days. The second number is the cost with penalty for the combination with the following nine numbers, each of which indicates the method number for 1 to 9 activity respectivily.
+
+Sort the rows for ${days} within excel, plot the result for (${days}, ${cost}) and you will understand it.
 
 I am kidding
 ============
