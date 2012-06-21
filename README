@@ -6,4 +6,56 @@
 #
 #   Created:    Tue Apr 17 20:45:33 CDT 2012
 #
+
 Beat Bid
+========
+The "show me the money" for BIG Building Industry Game on http://conindedu.org/big41/ .
+
+The Story
+=========
+My M.S. in Project Management friends were taking a construction bidding class at NorthwesternU and playing the BIG game for class credit. Well, it would be great if you could find the optimal solution with all these constrains. However, they knew there always exist living beings called programmer on earth, and these people usually save the <del>word</del>world by hiting CTRL+S. So, here comes my another free dinner story: code for >.< food. What came after the yummy chinese dinner was the 7hrs not-stop coding as well as recalling my math ;-p
+
+The code
+========
+It is kind of a greedy and brute forcing algo. Though I know DP will save much more running time, no one knows what we were thinking at the beginning (hint: evolves from MVP, well, P is product, not player). Hha, my frends even thought it super fast :) . So why not just have a cup of coffee and take the result.
+
+Usage
+=====
+Ask one of your CS friend, and enjoy the day like a boss.
+
+Special notes
+=============
+Penalty is the daily penalty, which also counts for the cost when exceeding the require day. For each ${day} in ${Target day}, you will get the min cost within ${day}. 1~9 indicate activities. Each line represents the constrain takeing from the game. 
+
+For example, "2 1 2 70% 100%" means 2. foundation activity can start no early than 1. Excavation's 70%, and can finish no late than its finishing (a liitle bit hacking, just to make it well formated). 
+
+So here come the tips for converting the game rule to input file:
+rule:
+	activity "aaaa"(1 ~ 9 respectivily)
+	Work may not start on "aaaa" until work on "bbbb" is xxxx% complete.
+	Work on "aaaa" may not proceed past yyyy% until work on "cccc" is 100% complete.
+input format:
+	aaaa bbbb cccc xxxx% yyyy%
+When missing some rules:
+	add these meaningless rules accordinally:
+		Work may not start on "aaaa" until work on "aaaa" is 0% complete.
+		Work on "aaaa" may not proceed past 100% until work on "aaaa" is 100% complete.
+
+Below the num of method, the large table is taken directly from the website. Warning, only copy the table from website or excel. It is because there are hidden {TAB}s.
+
+Analyis the result
+==================
+make
+./main whateverinputfile
+--> you will get whateverinputfile.out
+take out all the rows with mini cost=1e12. It is the combination that impossible to be less then ${day}.
+Sort the rows within excel, plot the result and you will understand it.
+
+I am kidding
+============
+Kicking out the mutithread support, you can compile it on windows. But I suggest not to do so. Once a while it also works on linux. But I always use my Mac to run them. 
+Also, keep it secret, and only tell your competitors after the final exam :)
+
+License
+=======
+BSD license
